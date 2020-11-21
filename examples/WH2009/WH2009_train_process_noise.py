@@ -57,25 +57,24 @@ if __name__ == '__main__':
     N_fit = u_fit.shape[0]
 
     # In[Add process noise]
+    std_v = 0.1 # noise standard deviation
 
-    #Hud = control.TransferFunction([1, -0.3825, -0.558], [1, -0.4103, -0.5847], ts)
+    # w_v = 10000
+    # damp_v = 0.2
+    #
+    # Hu = control.TransferFunction(np.array([0, 0, w_v**2]), np.array([1, 2*damp_v*w_v, w_v**2])) + 0.1
+    # Hud = control.matlab.c2d(Hu, ts)
+    #
+    # Hud.num[0][0] = Hud.num[0][0] / Hud.num[0][0][0]
+    # Hud.den[0][0] = Hud.den[0][0] / Hud.den[0][0][0]
 
-    std_v = 0.1
-    w_v = 10000
-    damp_v = 0.2
+    r_den = 0.97  # magnitude of poles (approx 9.78 kHz)
+    wo_den = 0.2  # phase of poles (approx 2.26 kHz)
 
-    Hu = control.TransferFunction(np.array([0, 0, w_v**2]), np.array([1, 2*damp_v*w_v, w_v**2])) + 0.1
-    #Hu = control.TransferFunction([1e-6, 0, 1], [1, 2 * damp_v * w_v, w_v ** 2])
-    #Hu = Hu * Hu
-    Hud = control.matlab.c2d(Hu, ts)
+    r_num = 0.95  # magnitude of zeros
+    wo_num = 0.6  # phase of zeros
 
-    Hud.num[0][0] = Hud.num[0][0] / Hud.num[0][0][0]
-    Hud.den[0][0] = Hud.den[0][0] / Hud.den[0][0][0]
-    #Hud.num[0][0] = np.r_[Hud.num[0][0], 0]
-    t_imp = np.arange(1000) * ts
-    t_imp, y_imp = control.impulse_response(Hud, t_imp)
-    std_tmp = np.sqrt(np.sum(y_imp ** 2))  # np.sqrt(trapz(y**2,t))
-    #Hud = control.TransferFunction([1, -0.3825, -0.558], [1, -0.4103, -0.5847], ts)
+    H_noise = control.TransferFunction([1, -2*r_num * np.cos(wo_num), r_num**2], [1, -2*r_den*np.cos(wo_den), r_den**2], ts)
 
     # N_skip int(20 * tau_v // ts) # skip initial samples to get a regime sample of d
     n_skip_d = 0

@@ -9,8 +9,6 @@ import control.matlab
 import time
 
 
-import util.metrics
-
 # In[Main]
 if __name__ == '__main__':
 
@@ -58,14 +56,24 @@ if __name__ == '__main__':
 
     # In[Add process noise]
 
-    std_v = 0.1
-    w_v = 10000
-    damp_v = 0.2
+    std_v = 0.1 # noise standard deviation
 
-    H_noise_ct = control.TransferFunction(np.array([0, 0, w_v ** 2]), np.array([1, 2 * damp_v * w_v, w_v ** 2])) + 0.1
-    H_noise = control.matlab.c2d(H_noise_ct, ts)
-    H_noise.num[0][0] = H_noise.num[0][0] / H_noise.num[0][0][0]
-    H_noise.den[0][0] = H_noise.den[0][0] / H_noise.den[0][0][0]
+    # w_v = 10000
+    # damp_v = 0.2
+    #
+    # Hu = control.TransferFunction(np.array([0, 0, w_v**2]), np.array([1, 2*damp_v*w_v, w_v**2])) + 0.1
+    # Hud = control.matlab.c2d(Hu, ts)
+    #
+    # Hud.num[0][0] = Hud.num[0][0] / Hud.num[0][0][0]
+    # Hud.den[0][0] = Hud.den[0][0] / Hud.den[0][0][0]
+
+    r_den = 0.97  # magnitude of poles (approx 9.78 kHz)
+    wo_den = 0.2  # phase of poles (approx 2.26 kHz)
+
+    r_num = 0.95  # magnitude of zeros
+    wo_num = 0.6  # phase of zeros
+
+    H_noise = control.TransferFunction([1, -2*r_num * np.cos(wo_num), r_num**2], [1, -2*r_den*np.cos(wo_den), r_den**2], ts)
 
     # Find noise scale factor
     t_imp = np.arange(1000) * ts
@@ -170,7 +178,7 @@ if __name__ == '__main__':
 
     # In[Plot]
     plt.figure()
-    # plt.plot(t_fit, y_fit, 'k', label="$y$")
+    plt.plot(t_fit, y_fit, 'k', label="$y$")
     plt.plot(t_fit, y_fit_clean, 'r', label="$y_{clean}$")
     plt.plot(t_fit, y_hat, 'b', label="$\hat y$")
     plt.legend()

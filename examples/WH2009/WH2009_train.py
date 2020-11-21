@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # In[Settings]
     lr_ADAM = 2e-4
     lr_BFGS = 1e0
-    num_iter_ADAM = 1000  # ADAM iterations 20000
+    num_iter_ADAM = 40000  # ADAM iterations 20000
     num_iter_BFGS = 0  # final BFGS iterations
     msg_freq = 100
     n_skip = 5000
@@ -167,9 +167,3 @@ if __name__ == '__main__':
     # In[Plot]
     e_rms = util.metrics.error_rmse(y_hat, y_fit)[0]
     print(f"RMSE: {e_rms:.2f}") # target: 1mv
-
-
-
-
-
-
