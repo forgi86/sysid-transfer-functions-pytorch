@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import matplotlib
 import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
@@ -12,6 +13,8 @@ from examples.ParWH.models import ParallelWHNet
 
 
 if __name__ == '__main__':
+
+    matplotlib.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
 
     model_name = "PWH_quant"
 
@@ -27,8 +30,8 @@ if __name__ == '__main__':
     TAG_U = 'u'
     TAG_Y = 'y'
 
-    test_signal = "100mV" #"ramp" #ramp"#"320mV" #"1000mV"#"ramp"
-
+    test_signal = "1000mV" #"ramp" #ramp"#"320mV" #"1000mV"#"ramp"
+    plot_input = False
 
     # In[Load dataset]
 
@@ -70,16 +73,33 @@ if __name__ == '__main__':
     y_hat = y_hat.detach().numpy()[0, :, 0]
 
     # In[Plot]
-    fig, ax = plt.subplots(2, 1, sharex=True)
-    ax[0].plot(t, y_meas, 'k', label="$y$")
-    ax[0].plot(t, y_hat, 'r', label="$\hat y$")
-    ax[0].plot(t, y_meas - y_hat, 'g', label="$e$")
-    ax[0].legend()
-    ax[0].grid()
+    if plot_input:
+        fig, ax = plt.subplots(2, 1, sharex=True)
+        ax[0].plot(t, y_meas, 'k', label="$y$")
+        ax[0].plot(t, y_hat, 'b', label="$\hat y$")
+        ax[0].plot(t, y_meas - y_hat, 'r', label="$e$")
+        ax[0].legend(loc="upper right")
+        ax[0].set_ylabel("Voltage (V)")
+        ax[0].grid()
 
-    ax[1].plot(t, u, 'k', label="$u$")
-    ax[1].legend()
-    ax[1].grid()
+        ax[1].plot(t, u, 'k', label="$u$")
+        ax[1].legend(loc="upper right")
+        ax[1].set_ylabel("Voltage (V)")
+        ax[1].set_xlabel("Time (s)")
+        ax[1].grid()
+    else:
+        fig, ax = plt.subplots(1, 1, sharex=True)
+        ax.plot(t, y_meas, 'k', label="$y$")
+        ax.plot(t, y_hat, 'b', label="$\hat y$")
+        ax.plot(t, y_meas - y_hat, 'r', label="$e$")
+        ax.legend(loc="upper right")
+        ax.set_ylabel("Voltage (V)")
+        ax.grid()
+
+    fig_folder = "fig"
+    if not os.path.exists(fig_folder):
+        os.makedirs(fig_folder)
+    fig.savefig(os.path.join(fig_folder, f"{model_name}_timetrace.pdf"))
 
     # In[Inspect linear model]
 

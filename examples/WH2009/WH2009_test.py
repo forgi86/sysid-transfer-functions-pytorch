@@ -54,9 +54,9 @@ if __name__ == '__main__':
 
     model_folder = os.path.join("models", model_name)
     # Create model parameters
-    G1.load_state_dict(torch.load(os.path.join(model_folder, "G1.pkl")))
-    F_nl.load_state_dict(torch.load(os.path.join(model_folder, "F_nl.pkl")))
-    G2.load_state_dict(torch.load(os.path.join(model_folder, "G2.pkl")))
+    G1.load_state_dict(torch.load(os.path.join(model_folder, "G1.pt")))
+    F_nl.load_state_dict(torch.load(os.path.join(model_folder, "F_nl.pt")))
+    G2.load_state_dict(torch.load(os.path.join(model_folder, "G2.pt")))
 
     # In[Predict]
 
@@ -70,6 +70,11 @@ if __name__ == '__main__':
     y1_lin = y1_lin.detach().numpy()[0, :, :]
     y1_nl = y1_nl.detach().numpy()[0, :, :]
 
+    # In[]
+    fig_folder = "fig"
+    if not os.path.exists(fig_folder):
+        os.makedirs(fig_folder)
+
     # In[Plot]
     plt.figure()
     plt.plot(t, y_meas, 'k', label="$y$")
@@ -79,7 +84,7 @@ if __name__ == '__main__':
     plt.xlabel('Time (s)')
     plt.ylabel('Voltage (V)')
     plt.legend(loc='upper right')
-    plt.savefig('WH_fit.pdf')
+    plt.savefig(os.path.join(fig_folder, f"{model_name}_fit.pdf"))
 
     # In[Inspect linear model]
 
@@ -151,3 +156,57 @@ if __name__ == '__main__':
     plt.legend(loc='upper right')
     plt.tight_layout()
     plt.savefig('WH_timetrace.pdf')
+
+
+    # In[Bode]
+
+    std_v = 0.1 # noise standard deviation
+
+    # w_v = 10000
+    # damp_v = 0.2
+    #
+    # Hu = control.TransferFunction(np.array([0, 0, w_v**2]), np.array([1, 2*damp_v*w_v, w_v**2])) + 0.1
+    # Hud = control.matlab.c2d(Hu, ts)
+    #
+    # Hud.num[0][0] = Hud.num[0][0] / Hud.num[0][0][0]
+    # Hud.den[0][0] = Hud.den[0][0] / Hud.den[0][0][0]
+
+    r_den = 0.97  # magnitude of poles
+    wo_den = 0.2  # phase of poles (approx 2.26 kHz)
+
+    r_num = 0.95  # magnitude of zeros
+    wo_num = 0.6  # phase of zeros (approx 9.78 kHz)
+
+    H_true = control.TransferFunction([1, -2 * r_num * np.cos(wo_num), r_num ** 2], [1, -2 * r_den * np.cos(wo_den), r_den ** 2], ts)
+
+    H_inv_learn = SisoLinearDynamicalOperator(2, 2, n_k=1)
+    H_inv_learn.load_state_dict(torch.load(os.path.join(model_folder, "H_inv.pt")))
+
+    n_imp = 128
+    H_inv_num, H_inv_den = H_inv_learn.get_tfdata()
+    H_inv_sys = 1 + control.TransferFunction(H_inv_num, H_inv_den, ts)
+    H_sys = 1/H_inv_sys
+
+    # In[]
+
+    mag_H_true, phase_H_true, omega_H_true = control.bode(H_true, omega_limits=[1e2, 1e4], Hz=True, Plot=False)
+    mag_H_hat, phase_H_hat, omega_H_hat = control.bode(H_sys, omega_limits=[1e2, 1e4], Hz=True, Plot=False)
+
+    plt.figure()
+    plt.semilogx(omega_H_true/2/np.pi, 20*np.log10(mag_H_true), 'k', label="$H(q)$")
+    plt.semilogx(omega_H_hat/2/np.pi, 20*np.log10(mag_H_hat), 'b', label="$\hat H(q)$")
+    plt.xlabel("Frequency (Hz)")
+    plt.ylabel("Magnitude (dB)")
+    plt.legend()
+    plt.grid()
+    plt.savefig(os.path.join(fig_folder, f"{model_name}_H_noise.pdf"))
+
+    # In[]
+    #plt.legend()
+    #plt.suptitle("$H_inv$ bode plot")
+#    plt.savefig(os.path.join("models", model_name, "G1_bode.pdf"))
+
+    plt.figure()
+    control.bode([H_sys, H_true], Hz=True)
+
+

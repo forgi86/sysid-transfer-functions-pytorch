@@ -67,11 +67,11 @@ if __name__ == '__main__':
     # Hud.num[0][0] = Hud.num[0][0] / Hud.num[0][0][0]
     # Hud.den[0][0] = Hud.den[0][0] / Hud.den[0][0][0]
 
-    r_den = 0.97  # magnitude of poles (approx 9.78 kHz)
+    r_den = 0.97  # magnitude of poles
     wo_den = 0.2  # phase of poles (approx 2.26 kHz)
 
     r_num = 0.95  # magnitude of zeros
-    wo_num = 0.6  # phase of zeros
+    wo_num = 0.6  # phase of zeros (approx 9.78 kHz)
 
     H_noise = control.TransferFunction([1, -2*r_num * np.cos(wo_num), r_num**2], [1, -2*r_den*np.cos(wo_den), r_den**2], ts)
 
@@ -162,10 +162,10 @@ if __name__ == '__main__':
     if not os.path.exists(model_folder):
         os.makedirs(model_folder)
 
-    torch.save(G1.state_dict(), os.path.join(model_folder, "G1.pkl"))
-    torch.save(F_nl.state_dict(), os.path.join(model_folder, "F_nl.pkl"))
-    torch.save(G2.state_dict(), os.path.join(model_folder, "G2.pkl"))
-    torch.save(H_inv_learn.state_dict(), os.path.join(model_folder, "H_inv.pkl"))
+    torch.save(G1.state_dict(), os.path.join(model_folder, "G1.pt"))
+    torch.save(F_nl.state_dict(), os.path.join(model_folder, "F_nl.pt"))
+    torch.save(G2.state_dict(), os.path.join(model_folder, "G2.pt"))
+    torch.save(H_inv_learn.state_dict(), os.path.join(model_folder, "H_inv.pt"))
 
     # In[Simulate one more time]
     with torch.no_grad():
