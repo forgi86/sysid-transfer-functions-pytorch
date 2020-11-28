@@ -14,7 +14,7 @@ import util.metrics
 # In[Main]
 if __name__ == '__main__':
 
-    matplotlib.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    matplotlib.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica'], 'size': 11})
     # In[Settings]
     #model_name = 'model_WH_digit'
     model_name = "model_WH_proc_noise_PEM"
@@ -76,14 +76,15 @@ if __name__ == '__main__':
         os.makedirs(fig_folder)
 
     # In[Plot]
-    plt.figure()
-    plt.plot(t, y_meas, 'k', label="$y$")
-    plt.plot(t, y_hat, 'b', label="$\hat y$")
-    plt.plot(t, y_meas - y_hat, 'r', label="$e$")
-    plt.grid(True)
-    plt.xlabel('Time (s)')
-    plt.ylabel('Voltage (V)')
-    plt.legend(loc='upper right')
+    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+    ax.plot(t, y_meas, 'k', label=r"$\mathbf{y}$")
+    ax.plot(t, y_hat, 'b', label=r"$\mathbf{y}^{\rm sim}$")
+    ax.plot(t, y_meas - y_hat, 'r', label=r"$\mathbf{e}$")
+    ax.grid(True)
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Voltage (V)')
+    ax.legend(loc='upper right')
+    fig.tight_layout()
     plt.savefig(os.path.join(fig_folder, f"{model_name}_fit.pdf"))
 
     # In[Inspect linear model]
@@ -146,16 +147,16 @@ if __name__ == '__main__':
     t_test_start = 140000
     len_plot = 1000
 
-    plt.figure(figsize=(4, 3))
-    plt.plot(t[t_test_start:t_test_start+len_plot], y_meas[t_test_start:t_test_start+len_plot], 'k', label="$\mathbf{y}^{\mathrm{meas}}$")
-    plt.plot(t[t_test_start:t_test_start+len_plot], y_hat[t_test_start:t_test_start+len_plot], 'b--', label="$\mathbf{y}$")
-    plt.plot(t[t_test_start:t_test_start+len_plot], y_meas[t_test_start:t_test_start+len_plot] - y_hat[t_test_start:t_test_start+len_plot], 'r', label="$\mathbf{e}$")
-    plt.grid(True)
-    plt.xlabel('Time (s)')
-    plt.ylabel('Voltage (V)')
-    plt.legend(loc='upper right')
-    plt.tight_layout()
-    plt.savefig('WH_timetrace.pdf')
+    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+    ax.plot(t[t_test_start:t_test_start+len_plot], y_meas[t_test_start:t_test_start+len_plot], 'k', label="$\mathbf{y}^{\mathrm{meas}}$")
+    ax.plot(t[t_test_start:t_test_start+len_plot], y_hat[t_test_start:t_test_start+len_plot], 'b--', label="$\mathbf{y}$")
+    ax.plot(t[t_test_start:t_test_start+len_plot], y_meas[t_test_start:t_test_start+len_plot] - y_hat[t_test_start:t_test_start+len_plot], 'r', label="$\mathbf{e}$")
+    ax.grid(True)
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Voltage (V)')
+    ax.legend(loc='upper right')
+    fig.tight_layout()
+    fig.savefig('WH_timetrace.pdf')
 
 
     # In[Bode]
@@ -192,13 +193,14 @@ if __name__ == '__main__':
     mag_H_true, phase_H_true, omega_H_true = control.bode(H_true, omega_limits=[1e2, 1e4], Hz=True, Plot=False)
     mag_H_hat, phase_H_hat, omega_H_hat = control.bode(H_sys, omega_limits=[1e2, 1e4], Hz=True, Plot=False)
 
-    plt.figure()
-    plt.semilogx(omega_H_true/2/np.pi, 20*np.log10(mag_H_true), 'k', label="$H(q)$")
-    plt.semilogx(omega_H_hat/2/np.pi, 20*np.log10(mag_H_hat), 'b', label="$\hat H(q)$")
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("Magnitude (dB)")
-    plt.legend()
-    plt.grid()
+    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+    ax.semilogx(omega_H_true/2/np.pi, 20*np.log10(mag_H_true), 'k', label="$H_o(q)$")
+    ax.semilogx(omega_H_hat/2/np.pi, 20*np.log10(mag_H_hat), 'b', label="$H(q, \\theta_H)$")
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Magnitude (dB)")
+    ax.legend()
+    ax.grid()
+    fig.tight_layout()
     plt.savefig(os.path.join(fig_folder, f"{model_name}_H_noise.pdf"))
 
     # In[]
@@ -206,7 +208,7 @@ if __name__ == '__main__':
     #plt.suptitle("$H_inv$ bode plot")
 #    plt.savefig(os.path.join("models", model_name, "G1_bode.pdf"))
 
-    plt.figure()
-    control.bode([H_sys, H_true], Hz=True)
+    #plt.figure()
+    #control.bode([H_sys, H_true], Hz=True)
 
 

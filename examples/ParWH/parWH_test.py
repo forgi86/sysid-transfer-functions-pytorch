@@ -14,7 +14,7 @@ from examples.ParWH.models import ParallelWHNet
 
 if __name__ == '__main__':
 
-    matplotlib.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    matplotlib.rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica'], 'size': 11})
 
     model_name = "PWH_quant"
 
@@ -75,9 +75,9 @@ if __name__ == '__main__':
     # In[Plot]
     if plot_input:
         fig, ax = plt.subplots(2, 1, sharex=True)
-        ax[0].plot(t, y_meas, 'k', label="$y$")
-        ax[0].plot(t, y_hat, 'b', label="$\hat y$")
-        ax[0].plot(t, y_meas - y_hat, 'r', label="$e$")
+        ax[0].plot(t, y_meas, 'k', label="$\mathbf{y}$")
+        ax[0].plot(t, y_hat, 'b', label=r"$\mathbf{y}^{\rm sim}$")
+        ax[0].plot(t, y_meas - y_hat, 'r', label="$\mathbf{e}$")
         ax[0].legend(loc="upper right")
         ax[0].set_ylabel("Voltage (V)")
         ax[0].grid()
@@ -88,14 +88,16 @@ if __name__ == '__main__':
         ax[1].set_xlabel("Time (s)")
         ax[1].grid()
     else:
-        fig, ax = plt.subplots(1, 1, sharex=True)
-        ax.plot(t, y_meas, 'k', label="$y$")
-        ax.plot(t, y_hat, 'b', label="$\hat y$")
-        ax.plot(t, y_meas - y_hat, 'r', label="$e$")
+        fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+        ax.plot(t, y_meas, 'k', label="$\mathbf{y}$")
+        ax.plot(t, y_hat, 'b', label=r"$\mathbf{y}^{\rm sim}$")
+        ax.plot(t, y_meas - y_hat, 'r', label="$\mathbf{e}$")
         ax.legend(loc="upper right")
         ax.set_ylabel("Voltage (V)")
+        ax.set_xlabel("Time (s)")
         ax.grid()
 
+    fig.tight_layout()
     fig_folder = "fig"
     if not os.path.exists(fig_folder):
         os.makedirs(fig_folder)

@@ -1,9 +1,8 @@
-# Transfer functions and deep learning with dynoNet : new applications in system
-identification
+# Deep learning with transfer functions: new applications in system identification
  
 
 This repository contains the Python code to reproduce the results of the paper "Transfer functions and deep learning with dynoNet : new applications in system
-identification" by Marco Forgione and Dario Piga.
+identification" by Dario Piga, Marco Forgione, and Manas Mejari.
 
 We describe the linear dynamical operator as a differentiable layer compatible with back-propagation-based training. 
 The operator is parametrized as a rational transfer function and thus can represent an infinite impulse response (IIR)

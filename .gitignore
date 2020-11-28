@@ -1,6 +1,8 @@
 /examples/WH2009/data/
 /examples/WH2009/models/
+/examples/WH2009/fig/
 /examples/ParWH/data/
-/examples/ParWH/models/model_PWH/
+/examples/ParWH/models
+/examples/ParWH/fig
 /sphinx/build/
 
