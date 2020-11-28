@@ -30,12 +30,18 @@ if __name__ == '__main__':
     TAG_U = 'u'
     TAG_Y = 'y'
 
-    test_signal = "1000mV" #"ramp" #ramp"#"320mV" #"1000mV"#"ramp"
+#    test_signal = "100mV"
+#    test_signal = "325mV"
+#    test_signal = "775mV"
+#    test_signal = "1000mV"
+    test_signal = "ramp"
+
+    #test_signal = "1000mV" #"ramp" #ramp"#"320mV" #"1000mV"#"ramp"
     plot_input = False
 
     # In[Load dataset]
 
-    dict_test = {"100mV": 0, "320mV": 1, "550mV": 2, "775mV": 3, "1000mV": 4, "ramp": 5}
+    dict_test = {"100mV": 0, "325mV": 1, "550mV": 2, "775mV": 3, "1000mV": 4, "ramp": 5}
     dataset_list_level = ['ParWHData_Validation_Level' + str(i) for i in range(1, amplitudes + 1)]
     dataset_list = dataset_list_level + ['ParWHData_ValidationArrow']
 
@@ -92,10 +98,16 @@ if __name__ == '__main__':
         ax.plot(t, y_meas, 'k', label="$\mathbf{y}$")
         ax.plot(t, y_hat, 'b', label=r"$\mathbf{y}^{\rm sim}$")
         ax.plot(t, y_meas - y_hat, 'r', label="$\mathbf{e}$")
-        ax.legend(loc="upper right")
+        if test_signal == "ramp":
+            ax.legend(loc="upper left")
+        else:
+            ax.legend(loc="upper right")
         ax.set_ylabel("Voltage (V)")
         ax.set_xlabel("Time (s)")
         ax.grid()
+
+        if test_signal == "ramp":
+            ax.set_xlim([0.0, 0.21])
 
     fig.tight_layout()
     fig_folder = "fig"

@@ -24,8 +24,8 @@ transfer function block, namely:
 
 Two [examples](examples) discussed in the paper are:
 
-* [Parallel Wiener-Hammerstein](examples/ParWH): A circuit with Wiener-Hammerstein behavior. Experimental dataset from http://www.nonlinearbenchmark.org
-* [BW](examples/BW): Bouc-Wen. A nonlinear dynamical system describing hysteretic effects in mechanical engineering. Experimental dataset from http://www.nonlinearbenchmark.org
+* [Parallel Wiener-Hammerstein](examples/ParWH): A circuit with a two-branch parallel Wiener-Hammerstein structure. Experimental dataset from http://www.nonlinearbenchmark.org
+* [WH](examples/WH): A circuit with Wiener-Hammerstein structure. Experimental dataset from http://www.nonlinearbenchmark.org
 
 
 For the [WH2009](examples/WH2009) example, the main scripts are:
