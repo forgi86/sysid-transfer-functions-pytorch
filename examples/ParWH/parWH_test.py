@@ -32,6 +32,7 @@ if __name__ == '__main__':
 
 #    test_signal = "100mV"
 #    test_signal = "325mV"
+#    test_signal = "550mV"
 #    test_signal = "775mV"
 #    test_signal = "1000mV"
     test_signal = "ramp"
@@ -114,36 +115,6 @@ if __name__ == '__main__':
     if not os.path.exists(fig_folder):
         os.makedirs(fig_folder)
     fig.savefig(os.path.join(fig_folder, f"{model_name}_timetrace.pdf"))
-
-    # In[Inspect linear model]
-
-    # First linear block
-    # a_coeff_1 = net.G1.a_coeff.detach().numpy()
-    # b_coeff_1 = net.G1.b_coeff.detach().numpy()
-    # a_poly_1 = np.empty_like(a_coeff_1, shape=(2, 2, net.na_1 + 1))
-    # a_poly_1[:, :, 0] = 1
-    # a_poly_1[:, :, 1:] = a_coeff_1[:, :, :]
-    # b_poly_1 = np.array(b_coeff_1)
-    # G1_sys = control.TransferFunction(b_poly_1, a_poly_1, ts)
-    #
-    # plt.figure()
-    # mag_G1_1, phase_G1_1, omega_G1_1 = control.bode(G1_sys[0, 0])
-    # plt.figure()
-    # mag_G1_2, phase_G1_2, omega_G1_2 = control.bode(G1_sys[1, 0])
-    #
-    # # Second linear block
-    # a_coeff_2 = net.G2.a_coeff.detach().numpy()
-    # b_coeff_2 = net.G2.b_coeff.detach().numpy()
-    # a_poly_2 = np.empty_like(a_coeff_2, shape=(2, 1, net.na_2 + 1))
-    # a_poly_2[:, :, 0] = 1
-    # a_poly_2[:, :, 1:] = a_coeff_2[:, :, :]
-    # b_poly_2 = np.array(b_coeff_2)
-    # G2_sys = control.TransferFunction(b_poly_2, a_poly_2, ts)
-
-    # plt.figure()
-    # mag_G2_1, phase_G2_1, omega_G2_1 = control.bode(G2_sys[0, 0])
-    # plt.figure()
-    # mag_G2_2, phase_G2_2, omega_G2_2 = control.bode(G2_sys[0, 1])
 
 
     # In[Metrics]

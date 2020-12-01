@@ -43,7 +43,7 @@ if __name__ == '__main__':
     t_fit_end = 100000
     t_test_start = 100000
     t_test_end = 188000
-    t_skip = 1000  # skip for statistics
+    t_skip = 0  # skip for statistics
 
     # In[Instantiate models]
 
@@ -84,6 +84,10 @@ if __name__ == '__main__':
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Voltage (V)')
     ax.legend(loc='upper right')
+    ax.set_xlim([3.58, 3.597])
+    #ax.set_xlim([0.690, 0.7])
+    #ax.set_xlim([0, 4.0])
+    ax.set_ylim([-0.7, 0.7])
     fig.tight_layout()
     plt.savefig(os.path.join(fig_folder, f"{model_name}_fit.pdf"))
 
@@ -140,23 +144,6 @@ if __name__ == '__main__':
     r_sq = util.metrics.r_squared(y_meas[idx_test], y_hat[idx_test])[0]
 
     print(f"RMSE: {e_rms:.1f}V\nFIT:  {fit_idx:.1f}%\nR_sq: {r_sq:.4f}")
-
-
-    # In[Plot for paper]
-
-    t_test_start = 140000
-    len_plot = 1000
-
-    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
-    ax.plot(t[t_test_start:t_test_start+len_plot], y_meas[t_test_start:t_test_start+len_plot], 'k', label="$\mathbf{y}^{\mathrm{meas}}$")
-    ax.plot(t[t_test_start:t_test_start+len_plot], y_hat[t_test_start:t_test_start+len_plot], 'b--', label="$\mathbf{y}$")
-    ax.plot(t[t_test_start:t_test_start+len_plot], y_meas[t_test_start:t_test_start+len_plot] - y_hat[t_test_start:t_test_start+len_plot], 'r', label="$\mathbf{e}$")
-    ax.grid(True)
-    ax.set_xlabel('Time (s)')
-    ax.set_ylabel('Voltage (V)')
-    ax.legend(loc='upper right')
-    fig.tight_layout()
-    fig.savefig('WH_timetrace.pdf')
 
 
     # In[Bode]
