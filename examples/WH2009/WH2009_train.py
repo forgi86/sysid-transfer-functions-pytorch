@@ -62,7 +62,7 @@ if __name__ == '__main__':
     # In[Prepare model]
     G1 = SisoLinearDynamicalOperator(n_b, n_a, n_k=1)
     F_nl = SisoStaticNonLinearity(n_hidden=10, activation='tanh')
-    G2 = SisoLinearDynamicalOperator(n_b, n_a)
+    G2 = SisoLinearDynamicalOperator(n_b+1, n_a, n_k=0)
 
     def model(u_in):
         y1_lin = G1(u_fit_torch)

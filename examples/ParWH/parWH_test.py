@@ -68,7 +68,8 @@ if __name__ == '__main__':
     net = ParallelWHNet()
     model_folder = os.path.join("models", model_name)
     net.load_state_dict(torch.load(os.path.join(model_folder, f"{model_name}.pt")))
-
+    log_sigma_hat = torch.load(os.path.join(model_folder, "log_sigma_hat.pt"))
+    sigma_hat = torch.exp(log_sigma_hat) + 1e-3
     # In[Predict]
     u_torch = torch.tensor(u[None, :, None],  dtype=torch.float, requires_grad=False)
 

@@ -4,12 +4,12 @@ from torchid_nb.module.static import MimoStaticNonLinearity, MimoChannelWiseNonL
 
 
 class ParallelWHNet(torch.nn.Module):
-    def __init__(self):
+    def __init__(self, nb_1=12, na_1=12, nb_2=13, na_2=12):
         super(ParallelWHNet, self).__init__()
-        self.nb_1 = 12
-        self.na_1 = 12
-        self.nb_2 = 13
-        self.na_2 = 12
+        self.nb_1 = nb_1
+        self.na_1 = na_1
+        self.nb_2 = nb_2
+        self.na_2 = na_2
         self.G1 = MimoLinearDynamicalOperator(1, 2, n_b=self.nb_1, n_a=self.na_1, n_k=1)
         self.F_nl = MimoChannelWiseNonLinearity(2, n_hidden=10)
         #self.F_nl = MimoStaticNonLinearity(2, 2, n_hidden=10)

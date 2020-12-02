@@ -97,7 +97,7 @@ if __name__ == '__main__':
     # In[Prepare model]
     G1 = SisoLinearDynamicalOperator(n_b, n_a, n_k=1)
     F_nl = SisoStaticNonLinearity(n_hidden=10, activation='tanh')
-    G2 = SisoLinearDynamicalOperator(n_b, n_a)
+    G2 = SisoLinearDynamicalOperator(n_b, n_a, n_k=0)
 
     H_inv_learn = SisoLinearDynamicalOperator(2, 2, n_k=1)
 
