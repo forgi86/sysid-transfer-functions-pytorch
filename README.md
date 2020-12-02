@@ -20,7 +20,7 @@ other challenging problems in system identification. In particular:
 
 Two [examples](examples) discussed in the paper are:
 
-* [WH2009](examples/WH): A circuit with Wiener-Hammerstein structure. Experimental dataset from http://www.nonlinearbenchmark.org
+* [WH2009](examples/WH2009): A circuit with Wiener-Hammerstein structure. Experimental dataset from http://www.nonlinearbenchmark.org
 * [Parallel Wiener-Hammerstein](examples/ParWH): A circuit with a two-branch parallel Wiener-Hammerstein structure. Experimental dataset from http://www.nonlinearbenchmark.org
 
 
