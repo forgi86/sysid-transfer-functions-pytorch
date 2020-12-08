@@ -15,10 +15,10 @@ other challenging problems in system identification. In particular, we consider 
 
 Problem 1. is tackled by extending the prediction error minimization method to deep learning models. A trainable linear transfer function block
 is used to describe the power spectrum of the noise:
- <img src="fig/neural_PEM.png" alt="Neural PEM" width="65%">
+ <center><img src="fig/neural_PEM.png" alt="Neural PEM" width="55%"></center>
 
 Problem 2. is tackled by training a dynoNet model with a loss function corresponding to the log-likelihood of quantized observations:
-<img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="65%">
+<img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="55%">
 
 # Folders:
 * [torchid](torchid_nb):  PyTorch implementation of the linear dynamical operator (aka G-block in the paper) used in dynoNet
