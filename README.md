@@ -16,10 +16,10 @@ other challenging problems in system identification. In particular, we consider 
 The block diagram of the two schemes is reported in the following figures
  <div class="row">
   <div class="column"> 
-    <img src="fig/neural_PEM.png" alt="Neural PEM" width="48%">
+    <img src="fig/neural_PEM.png" alt="Neural PEM" width="45%">
   </div>
   <div class="column">
-    <img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="48%">
+    <img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="45%">
   </div>
 </div> 
 
