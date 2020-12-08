@@ -10,8 +10,8 @@ activation functions applied channel-wise; fully connected feed-forward neural n
 In this work, we use the differentiable transfer function operator to tackle
 other challenging problems in system identification. In particular:
 
-* Learning in the presence of colored noise (prediction error minimization method)
-* Learning with quantized output measurements (maximum likelihood estimation method)
+1. Learning in the presence of colored noise (prediction error minimization method)
+1. Learning with quantized output measurements (maximum likelihood estimation method)
 
 # Folders:
 * [torchid](torchid_nb):  PyTorch implementation of the linear dynamical operator (aka G-block in the paper) used in dynoNet
