@@ -3,7 +3,7 @@
 
 This repository contains the Python code to reproduce the results of the paper "Deep learning with transfer functions: new applications in system identification" by Dario Piga, Marco Forgione, and Manas Mejari.
 
-We describe a linear dynamical operator described in terms of a rational transfer function, endowed with a well-defined and efficient back-propagation behavior for
+We present a linear transfer function block, endowed with a well-defined and efficient back-propagation behavior for
 automatic derivatives computation. In the dynoNet architecture (already introduced [here](https://github.com/forgi86/dynonet)), linear dynamical operators are combined with static (i.e., memoryless) non-linearities which can be either elementary
 activation functions applied channel-wise; fully connected feed-forward neural networks; or other differentiable operators. 
 
