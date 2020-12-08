@@ -10,18 +10,15 @@ activation functions applied channel-wise; fully connected feed-forward neural n
 In this work, we use the differentiable transfer function operator to tackle
 other challenging problems in system identification. In particular, we consider the problems of:
 
-1. Learning of dynamical models in the presence of colored noise (prediction error minimization method)
+1. Learning of neural dynamical models in the presence of colored noise (prediction error minimization method)
 1. Learning of dynoNet models from quantized output observations (maximum likelihood estimation method)
 
-The block diagram of the two schemes is reported in the following figures
- <div class="row">
-  <div class="column"> 
-    <img src="fig/neural_PEM.png" alt="Neural PEM" width="45%">
-  </div>
-  <div class="column">
-    <img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="45%">
-  </div>
-</div> 
+Problem 1. is tackled by extending the prediction error minimization method to deep learning models. A trainable linear transfer function block
+is used to describe the power spectrum of the noise:
+ <img src="fig/neural_PEM.png" alt="Neural PEM" width="65%">
+
+Problem 2. is tackled by training a dynoNet model with a loss function corresponding to the log-likelihood of quantized observations:
+<img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="65%">
 
 # Folders:
 * [torchid](torchid_nb):  PyTorch implementation of the linear dynamical operator (aka G-block in the paper) used in dynoNet
