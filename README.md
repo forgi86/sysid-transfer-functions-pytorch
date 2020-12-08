@@ -8,10 +8,20 @@ automatic derivatives computation. In the dynoNet architecture (already introduc
 activation functions applied channel-wise; fully connected feed-forward neural networks; or other differentiable operators. 
 
 In this work, we use the differentiable transfer function operator to tackle
-other challenging problems in system identification. In particular:
+other challenging problems in system identification. In particular, we consider the problems of:
 
-1. Learning in the presence of colored noise (prediction error minimization method)
-1. Learning with quantized output measurements (maximum likelihood estimation method)
+1. Learning of dynamical models in the presence of colored noise (prediction error minimization method)
+1. Learning of dynoNet models from quantized output observations (maximum likelihood estimation method)
+
+The block diagram of the two schemes is reported in the following figures
+ <div class="row">
+  <div class="column"> 
+    <img src="fig/neural_PEM.png" alt="Neural PEM" width="48%">
+  </div>
+  <div class="column">
+    <img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="48%">
+  </div>
+</div> 
 
 # Folders:
 * [torchid](torchid_nb):  PyTorch implementation of the linear dynamical operator (aka G-block in the paper) used in dynoNet
