@@ -13,10 +13,12 @@ other challenging problems in system identification. In particular, we consider 
 1. Learning of neural dynamical models in the presence of colored noise (prediction error minimization method)
 1. Learning of dynoNet models from quantized output observations (maximum likelihood estimation method)
 
+<br/>
 Problem 1. is tackled by extending the prediction error minimization method to deep learning models. A trainable linear transfer function block
 is used to describe the power spectrum of the noise:
  <center><img src="fig/neural_PEM.png" alt="Neural PEM" width="55%"></center>
 
+<br/>
 Problem 2. is tackled by training a dynoNet model with a loss function corresponding to the log-likelihood of quantized observations:
 <img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="55%">
 
