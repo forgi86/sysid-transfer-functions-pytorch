@@ -3,15 +3,24 @@
 
 This repository contains the Python code to reproduce the results of the paper "Deep learning with transfer functions: new applications in system identification" by Dario Piga, Marco Forgione, and Manas Mejari.
 
-We describe a linear dynamical operator described in terms of a rational transfer function, endowed with a well-defined and efficient back-propagation behavior for
+We present a linear transfer function block, endowed with a well-defined and efficient back-propagation behavior for
 automatic derivatives computation. In the dynoNet architecture (already introduced [here](https://github.com/forgi86/dynonet)), linear dynamical operators are combined with static (i.e., memoryless) non-linearities which can be either elementary
 activation functions applied channel-wise; fully connected feed-forward neural networks; or other differentiable operators. 
 
 In this work, we use the differentiable transfer function operator to tackle
-other challenging problems in system identification. In particular:
+other challenging problems in system identification. In particular, we consider the problems of:
 
-* Learning in the presence of colored noise (prediction error minimization method)
-* Learning with quantized output measurements (maximum likelihood estimation method)
+1. Learning of neural dynamical models in the presence of colored noise (prediction error minimization method)
+1. Learning of dynoNet models from quantized output observations (maximum likelihood estimation method)
+
+<br/>
+Problem 1. is tackled by extending the prediction error minimization method to deep learning models. A trainable linear transfer function block
+is used to describe the power spectrum of the noise:
+ <center><img src="fig/neural_PEM.png" alt="Neural PEM" width="55%"></center>
+
+<br/>
+Problem 2. is tackled by training a dynoNet model with a loss function corresponding to the log-likelihood of quantized observations:
+<img src="fig/dynonet_quant.png" alt="ML quantized measurements" width="55%">
 
 # Folders:
 * [torchid](torchid_nb):  PyTorch implementation of the linear dynamical operator (aka G-block in the paper) used in dynoNet
