@@ -148,7 +148,7 @@ if __name__ == '__main__':
 
 
     # In[Save model]
-    model_name = "PWH"
+    model_name = "PWH_plain"
     model_folder = os.path.join("models", model_name)
     if not os.path.exists(model_folder):
         os.makedirs(model_folder)

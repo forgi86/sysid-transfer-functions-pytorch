@@ -4,10 +4,6 @@ import os
 import matplotlib
 import matplotlib.pyplot as plt
 import torch
-import torch.nn as nn
-import control
-from torchid_nb.module.lti import MimoLinearDynamicalOperator
-from torchid_nb.module.static import MimoStaticNonLinearity
 import util.metrics
 from examples.ParWH.models import ParallelWHNet
 
@@ -19,7 +15,7 @@ if __name__ == '__main__':
     model_name = "PWH_quant"
 
     # Dataset constants
-    amplitudes = 5  #  number of different amplitudes
+    amplitudes = 5  # number of different amplitudes
     realizations = 20  # number of random phase multisine realizations
     samp_per_period = 16384  # number of samples per period
     n_skip = 1000
@@ -68,8 +64,8 @@ if __name__ == '__main__':
     net = ParallelWHNet()
     model_folder = os.path.join("models", model_name)
     net.load_state_dict(torch.load(os.path.join(model_folder, f"{model_name}.pt")))
-    log_sigma_hat = torch.load(os.path.join(model_folder, "log_sigma_hat.pt"))
-    sigma_hat = torch.exp(log_sigma_hat) + 1e-3
+    #log_sigma_hat = torch.load(os.path.join(model_folder, "log_sigma_hat.pt"))
+    #sigma_hat = torch.exp(log_sigma_hat) + 1e-3
     # In[Predict]
     u_torch = torch.tensor(u[None, :, None],  dtype=torch.float, requires_grad=False)
 
