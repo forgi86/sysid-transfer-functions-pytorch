@@ -62,3 +62,18 @@ These dependencies may be installed through the commands:
 conda install numpy scipy pandas numba matplotlib
 conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
 ```
+
+# Citing
+
+If you find this project useful, we encourage you to
+
+* Star this repository :star: 
+* Cite the [paper](https://onlinelibrary.wiley.com/doi/abs/10.1002/acs.3216) 
+```
+@inproceedings{piga2021a,
+  title={Deep learning with transfer functions: new applications in system identification},
+  author={Piga, D. and Forgione, M. and Mejari, M.},
+  booktitle={Proc. of the 19th IFAC Symposium System Identification: learning models for decision and control},
+  year={2021}
+}
+```
