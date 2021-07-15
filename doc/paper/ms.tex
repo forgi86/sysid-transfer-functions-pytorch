@@ -397,9 +397,9 @@ where $\mathcal{M}(U_t,\theta_{\mathcal{M}})$ is a deterministic causal componen
 and $H(q, \theta_H)$ is a transfer function with parameters $\theta_H = [a_H \ b_H]$. We denote with $\theta = [\theta_{\mathcal{M}} \ \theta_{H}]$ the vector containing all the unknown parameters in~\eqref{eq:model_PEM}. 
 
 As known (see ~\cite[Ch. 2.3]{ljung:1999system}), the optimal \emph{one-step-ahead predictor} for  \eqref{eq:model_PEM} at time $t$, given input and output data up to time $t-1$, is given by
-\begin{multline} \label{eqn:y_pred}
-\hat y(t|t-1) = H^{-1}(q, \theta_H) \mathcal{M}(U_t, \theta_\mathcal{M}) \\+ [1\!-\!H^{-1}(q, \theta_H)]y(t).
-\end{multline}
+\begin{equation} \label{eqn:y_pred}
+\hat y(t|t-1) = H^{-1}(q, \theta_H) \mathcal{M}(U_t, \theta_\mathcal{M}) + [1\!-\!H^{-1}(q, \theta_H)]y(t).
+\end{equation}
 %where $Y_t$ is the past output sequence up to time $t$
 {Note that the output predictor in~\eqref{eqn:y_pred}  only depends on outputs up to time $t-1$ since $\!H^{-1}(q, \theta_H)$ is monic.}
 %and output up to time $t-1$ since $\mathcal{M}(U_t; \theta_\mathcal{M})$ is strictly casual and $\!H^{-1}(q; \theta_H)$ is monic.}. 
@@ -606,7 +606,8 @@ $\{3.65,8.20,12.02,16.04,22.06,21.37\}$~mV.  Time traces of the measured and sim
 
 \section{Conclusions}
 We have described  the operations required to make the linear time-invariant transfer functions fully compatible with the back-propagation algorithm.
-This enables training of structured models combining transfer functions with other differentiable operators (such as deep neural networks) using standard deep learning software. Furthermore,  \emph{dynoNet}   allows us to train dynamical models without using back-propagation through time.
+This enables training of structured models combining transfer functions with other differentiable operators (such as deep neural networks) using standard deep learning software. 
+%Moreover,  \emph{dynoNet}   allows us to train dynamical models without using back-propagation through time.
 
 Furthermore, we have illustrated two  applications of the back-propagation-compatible linear dynamical block in system identification, namely the extension of the prediction error method to non-linear neural models in the presence of additive colored noise and the estimation of block-oriented models from quantized output observations.
 

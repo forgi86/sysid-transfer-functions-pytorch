@@ -17,6 +17,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/examples/WH2009/WH2009_test.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/examples/WH2009/WH2009_train_colored_noise_PEM.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
