@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     # In[Add process noise]
 
-    std_v = 0.1 # noise standard deviation
+    std_v = 0.1  # noise standard deviation
 
     # w_v = 10000
     # damp_v = 0.2
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     N_sim_d = n_fit + n_skip_d
     e = np.random.randn(N_sim_d)/std_tmp*std_v
     te = np.arange(N_sim_d) * ts
-    _, d, _ = control.forced_response(H_noise, te, e)
+    _, d, _ = control.forced_response(H_noise, te, e, return_x=True)
     d_fast = d[n_skip_d:]
     d_fast = d_fast.reshape(-1, 1)
     y_fit = y_fit_clean + d_fast
