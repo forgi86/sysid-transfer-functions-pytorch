@@ -1,4 +1,4 @@
-# Deep learning with transfer functions: new applications in system identification
+# Deep learning with transfer functions: New applications in system identification
  
 
 This repository contains the Python code to reproduce the results of the paper "Deep learning with transfer functions: new applications in system identification" by Dario Piga, Marco Forgione, and Manas Mejari.
